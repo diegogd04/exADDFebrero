@@ -21,16 +21,15 @@ class CollectionDataRepository(private val mock: CollectionMockLocalDataSource, 
     }
 
     override fun getCollectionById(collectionId: String): Collection {
-        TODO("Not yet implemented")
-        //val collection = db.getCollections()
+        return db.getCollectionById(collectionId)
     }
 
     override fun deleteCollectionById(collectionId: String) {
-        TODO("Not yet implemented")
+        db.deleteCollectionById(collectionId)
     }
 
     override fun deleteMushroomById(collectionId: String, mushroomId: String) {
-        TODO("Not yet implemented")
+
     }
 
 

@@ -2,11 +2,7 @@ package com.edu.exaddfebrero.presentation
 
 import android.os.Bundle
 import android.util.Log
-import androidx.activity.enableEdgeToEdge
-import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import androidx.room.Room
 import com.edu.exaddfebrero.R
 import com.edu.exaddfebrero.app.AppDatabase
@@ -24,12 +20,14 @@ class MainActivity : AppCompatActivity() {
     private val mock = CollectionMockLocalDataSource()
     private val db = CollectionDbLocalDataSource(database.collectionDao())
     private val collectionDataRepository = CollectionDataRepository(mock, db)
-    private val collectionViewModel = CollectionViewModel(collectionDataRepository)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        val collections = collectionViewModel.loadCollections()
+        val collections = collectionDataRepository.getCollections()
         Log.d("@dev", collections.toString())
+        val collection = collectionDataRepository.getCollectionById("1")
+        Log.d("@dev", collection.toString())
+        collectionDataRepository.deleteCollectionById("1")
     }
 }

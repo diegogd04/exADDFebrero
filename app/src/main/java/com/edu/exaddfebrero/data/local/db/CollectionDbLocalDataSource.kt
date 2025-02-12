@@ -12,9 +12,17 @@ class CollectionDbLocalDataSource(private val collectionDao: CollectionDao) {
         }
     }
 
-    /*fun getCollectionById(): Collection{
-        val collection = collectionDao
-    }*/
+    fun getCollectionById(collectionId: String): Collection {
+        val collections = collectionDao.getCollections()
+        var collection = Collection("", "", emptyList())
+
+        collections.map {
+            if (it.id == collectionId) {
+                collection = it.toModel()
+            }
+        }
+        return collection
+    }
 
     fun saveCollections(collections: List<Collection>){
         val collectionsEntity =collections.map { collection ->
@@ -25,6 +33,16 @@ class CollectionDbLocalDataSource(private val collectionDao: CollectionDao) {
     }
 
     fun deleteCollectionById(collectionId: String){
-        collectionDao.deleteCollectionById(collectionId)
+        val collections = collectionDao.getCollections()
+
+        collections.map { collection ->
+            if (collection.id == collectionId) {
+                collectionDao.deleteCollection(collection)
+            }
+        }
+    }
+
+    fun deleteMushroomById(collectionId: String, mushroomId: String) {
+
     }
 }
