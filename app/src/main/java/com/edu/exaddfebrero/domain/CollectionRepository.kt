@@ -1,6 +1,6 @@
 package com.edu.exaddfebrero.domain
 
-interface MushroomRepository {
+interface CollectionRepository {
     fun getCollections(): List<Collection>
     fun getCollectionById(collectionId: String): Collection
     fun deleteCollectionById(collectionId: String)
